@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,19 @@ Route::prefix('v1')->post('/register', [AuthController::class, 'register']);
 Route::prefix('v1')->post('/login', [AuthController::class, 'login']);
 
 
-Route::prefix('v1')->middleware('auth:sanctum')->get('post',function(){
-    return "post";
+Route::prefix('v1')->middleware(['auth:sanctum','is_customer'])->get('post',function(){
+
+   /*$admin= \App\Models\Admin::create([
+       'role' => 'admin',
+   ]);
+   $admin->user()->create([
+       'name' => 'admin',
+       'email'=>'sa@s.com',
+       'password'=> bcrypt('123456'),
+   ]);*/
+
+//    return auth()->user()->userable;
+
+
+
 });

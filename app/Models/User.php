@@ -22,6 +22,11 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConcentrationController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VerifyAccountController; // تأكد من استيراد الكنترولر الصحيح
@@ -57,6 +58,15 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         Route::post('/', [CategoryController::class, 'store']);
         Route::post('/{id}', [CategoryController::class, 'update']);
         Route::delete('/{id}', [CategoryController::class, 'destroy']);
+    });
+
+    //for concentrations
+    Route::prefix('concentrations')->group(function () {
+        Route::get('/', [ConcentrationController::class, 'index']);
+        Route::get('/{id}', [ConcentrationController::class, 'show']);
+        Route::post('/', [ConcentrationController::class, 'store']);
+        Route::post('/{id}', [ConcentrationController::class, 'update']);
+        Route::delete('/{id}', [ConcentrationController::class, 'destroy']);
     });
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\VerifyAccountController; // تأكد من استيراد الكنترولر الصحيح
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,17 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', [FormController::class, 'destroy']);
 
     });
+
+    // for manufacturer
+    Route::prefix('manufacturers')->group(function () {
+        Route::get('/', [ManufacturerController::class, 'index']);
+        Route::get('/{id}', [ManufacturerController::class, 'show']);
+        Route::post('/', [ManufacturerController::class, 'store']);
+        Route::put('/{id}', [ManufacturerController::class, 'update']);
+        Route::delete('/{id}', [ManufacturerController::class, 'destroy']);
+
+    });
+
 
 
 });

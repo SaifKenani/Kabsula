@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\VerifyAccountController; // تأكد من استيراد الكنترولر الصحيح
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,13 +27,16 @@ Route::prefix('v1')->group(function () {
 });
 
 // 🔒 Protected Routes (للعملاء المسجلين فقط)
-Route::prefix('v1')->middleware(['auth:sanctum', 'is_customer'])->group(function () {
+Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
+    // for form
+    Route::prefix('forms')->group(function () {
+        Route::get('/', [FormController::class, 'index']);
+        Route::get('/{id}', [FormController::class, 'show']);
+        Route::post('/', [FormController::class, 'store']);
+        Route::put('/{id}', [FormController::class, 'update']);
+        Route::delete('/{id}', [FormController::class, 'destroy']);
 
-    Route::get('/post', function () {
-        return response()->json([
-            'message' => 'مرحباً، تم التحقق من المستخدم.'
-        ]);
     });
 
-    // أضف هنا المزيد من المسارات المحمية حسب الحاجة
+
 });
